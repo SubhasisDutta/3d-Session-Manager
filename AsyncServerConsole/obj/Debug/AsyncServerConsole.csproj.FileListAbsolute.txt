@@ -1,0 +1,6 @@
+C:\Workspace\3dDatabaseManager\3dDatabaseManager\AsyncServerConsole\bin\Debug\AsyncServerConsole.exe.config
+C:\Workspace\3dDatabaseManager\3dDatabaseManager\AsyncServerConsole\bin\Debug\AsyncServerConsole.exe
+C:\Workspace\3dDatabaseManager\3dDatabaseManager\AsyncServerConsole\bin\Debug\AsyncServerConsole.pdb
+C:\Workspace\3dDatabaseManager\3dDatabaseManager\AsyncServerConsole\obj\Debug\AsyncServerConsole.csprojResolveAssemblyReference.cache
+C:\Workspace\3dDatabaseManager\3dDatabaseManager\AsyncServerConsole\obj\Debug\AsyncServerConsole.exe
+C:\Workspace\3dDatabaseManager\3dDatabaseManager\AsyncServerConsole\obj\Debug\AsyncServerConsole.pdb

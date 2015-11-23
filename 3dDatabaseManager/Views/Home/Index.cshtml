@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>3D Session Manager</h1>
+    <p class="lead">This tool allows setup and management of metadata from 3D-Teleimmersion Sessions using HUNA Instances or indpendent registered instance.</p>
+    <p><a href="@Url.Action("About","Home")" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Instance</h2>
+        <p>
+            Use this link to register a new Instance or find out the details of curently registered instances.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Instance")">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Setup</h2>
+        <p>Create new 3d-Tele Immersion Configuration or modify existing Setups.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Setup")">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Session</h2>
+        <p>Stat a new 3d Session, manage or search metadata from different 3D Sessions.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Session")">Learn more &raquo;</a></p>
+    </div>
+</div>
