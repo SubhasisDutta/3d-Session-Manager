@@ -21,9 +21,12 @@ namespace _3DSessionListiningServer
         public StringBuilder sb = new StringBuilder();
     }
 
+    
+
     public class AsynchronousSocketListener
     {
-        public static MySQLManager db = new MySQLManager();
+        public static int SERVER_PORT = 11000;
+        public static string SERVER_IP = "127.0.0.1";
         // Thread signal.
         public static ManualResetEvent allDone = new ManualResetEvent(false);
 
@@ -39,10 +42,11 @@ namespace _3DSessionListiningServer
             // Establish the local endpoint for the socket.
             // The DNS name of the computer
             // running the listener is "host.contoso.com".
-            Console.WriteLine(Dns.GetHostName());
-            IPHostEntry ipHostInfo = Dns.Resolve("127.0.0.1");
+            Console.WriteLine("Sarting Sever at " + SERVER_IP + ":" + SERVER_PORT);
+            //Console.WriteLine(Dns.GetHostName());
+            IPHostEntry ipHostInfo = Dns.Resolve(SERVER_IP);
             IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, SERVER_PORT);
 
             // Create a TCP/IP socket.
             Socket listener = new Socket(AddressFamily.InterNetwork,
@@ -124,6 +128,7 @@ namespace _3DSessionListiningServer
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
 
+                    MySQLManager db = new MySQLManager();
                     //Copy the data to database
                     db.pushData(content);
 

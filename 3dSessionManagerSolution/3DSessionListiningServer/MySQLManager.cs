@@ -4,33 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 
 namespace _3DSessionListiningServer
 {
+    class InstanceMessage
+    {
+        public string id ;
+        public string dataType;
+        public string data;
+    }
     public class MySQLManager
     {
-        MySqlConnection conDatabase = null;
+        private Entities db = new Entities();
+
         public MySQLManager()
         {
-            string conststring = "Server=127.0.0.1;port=3306;Database=3dsessiondb;username=root;password=root;";
-            conDatabase = new MySqlConnection(conststring);
-            //conDatabase.Open();
+           
         }
         public Boolean pushData(String message)
-        {
-            string query = "insert into messagelog (externalId,timestamp,dataType,data) VALUES ('TestingID','2015-01-01','TESTTYPE','" + message + "');";
-            MySqlCommand cmdDatabase = new MySqlCommand(query, this.conDatabase);
+        {            
             try
             {
-                conDatabase.Open();
-                cmdDatabase.ExecuteReader();
-                //MySqlDataReader myReader = cmdDatabase.ExecuteReader();
-                Console.WriteLine("SAVED To DB" + message);
-                conDatabase.Close();
-                //while (myReader.Read())
-                //{
+                //Receive Client message and parse it to a JSON Object
+                InstanceMessage msg = JsonConvert.DeserializeObject<InstanceMessage>(message.Replace("<EOF>", ""));
+                //Save the message to a message log
+                messagelog messageLogObj = new messagelog();
+                messageLogObj.timestamp = DateTime.Now;
+                messageLogObj.externalID = msg.id;
+                messageLogObj.dataType = msg.dataType;
+                messageLogObj.data = msg.data;
+                db.messagelogs.Add(messageLogObj);
+                db.SaveChanges();
 
-                //}
+
             }
             catch (Exception ex)
             {
