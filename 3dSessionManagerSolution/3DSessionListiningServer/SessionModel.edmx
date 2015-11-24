@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dsessiondbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="instance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="externalId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="300" />
+          <Property Name="creationTimeStamp" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="setupId" Type="int" Nullable="false" />
+          <Property Name="instanceId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+          <Property Name="creationTimestamp" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="messagelog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="externalID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="dataType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="data" Type="longtext" />
+        </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="setupId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+          <Property Name="startTime" Type="datetime" Precision="0" />
+          <Property Name="endTime" Type="datetime" Precision="0" />
+          <Property Name="isActive" Type="bool" />
+        </EntityType>
+        <EntityType Name="sessiondata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sessionId" Type="int" Nullable="false" />
+          <Property Name="instanceId" Type="int" Nullable="false" />
+          <Property Name="dataType" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="data" Type="longtext" />
+          <Property Name="dataBlob" Type="blob" />
+          <Property Name="timeStamp" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="processedData" Type="blob" />
+        </EntityType>
+        <EntityType Name="setup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+          <Property Name="creationTimestamp" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <Association Name="instance_location_fk">
+          <End Role="instance" Type="Self.instance" Multiplicity="1" />
+          <End Role="location" Type="Self.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="instanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="instance_sessiondata_fk">
+          <End Role="instance" Type="Self.instance" Multiplicity="1" />
+          <End Role="sessiondata" Type="Self.sessiondata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sessiondata">
+              <PropertyRef Name="instanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="session_sessiondata_fk">
+          <End Role="session" Type="Self.session" Multiplicity="1" />
+          <End Role="sessiondata" Type="Self.sessiondata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sessiondata">
+              <PropertyRef Name="sessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="setup_location_fk">
+          <End Role="setup" Type="Self.setup" Multiplicity="1" />
+          <End Role="location" Type="Self.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="setupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="setupID_fk">
+          <End Role="setup" Type="Self.setup" Multiplicity="1" />
+          <End Role="session" Type="Self.session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="setupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dsessiondbModelStoreContainer">
+          <EntitySet Name="instance" EntityType="Self.instance" Schema="3dsessiondb" store:Type="Tables" />
+          <EntitySet Name="location" EntityType="Self.location" Schema="3dsessiondb" store:Type="Tables" />
+          <EntitySet Name="messagelog" EntityType="Self.messagelog" Schema="3dsessiondb" store:Type="Tables" />
+          <EntitySet Name="session" EntityType="Self.session" Schema="3dsessiondb" store:Type="Tables" />
+          <EntitySet Name="sessiondata" EntityType="Self.sessiondata" Schema="3dsessiondb" store:Type="Tables" />
+          <EntitySet Name="setup" EntityType="Self.setup" Schema="3dsessiondb" store:Type="Tables" />
+          <AssociationSet Name="instance_location_fk" Association="Self.instance_location_fk">
+            <End Role="instance" EntitySet="instance" />
+            <End Role="location" EntitySet="location" />
+          </AssociationSet>
+          <AssociationSet Name="instance_sessiondata_fk" Association="Self.instance_sessiondata_fk">
+            <End Role="instance" EntitySet="instance" />
+            <End Role="sessiondata" EntitySet="sessiondata" />
+          </AssociationSet>
+          <AssociationSet Name="session_sessiondata_fk" Association="Self.session_sessiondata_fk">
+            <End Role="session" EntitySet="session" />
+            <End Role="sessiondata" EntitySet="sessiondata" />
+          </AssociationSet>
+          <AssociationSet Name="setup_location_fk" Association="Self.setup_location_fk">
+            <End Role="setup" EntitySet="setup" />
+            <End Role="location" EntitySet="location" />
+          </AssociationSet>
+          <AssociationSet Name="setupID_fk" Association="Self.setupID_fk">
+            <End Role="setup" EntitySet="setup" />
+            <End Role="session" EntitySet="session" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dsessiondbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="instance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="externalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="creationTimeStamp" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="locations" Relationship="Self.instance_location_fk" FromRole="instance" ToRole="location" />
+          <NavigationProperty Name="sessiondatas" Relationship="Self.instance_sessiondata_fk" FromRole="instance" ToRole="sessiondata" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="setupId" Type="Int32" Nullable="false" />
+          <Property Name="instanceId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="creationTimestamp" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="instance" Relationship="Self.instance_location_fk" FromRole="location" ToRole="instance" />
+          <NavigationProperty Name="setup" Relationship="Self.setup_location_fk" FromRole="location" ToRole="setup" />
+        </EntityType>
+        <EntityType Name="messagelog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="externalID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Nullable="false" />
+          <Property Name="dataType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="setupId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="startTime" Type="DateTime" />
+          <Property Name="endTime" Type="DateTime" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="sessiondatas" Relationship="Self.session_sessiondata_fk" FromRole="session" ToRole="sessiondata" />
+          <NavigationProperty Name="setup" Relationship="Self.setupID_fk" FromRole="session" ToRole="setup" />
+        </EntityType>
+        <EntityType Name="sessiondata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sessionId" Type="Int32" Nullable="false" />
+          <Property Name="instanceId" Type="Int32" Nullable="false" />
+          <Property Name="dataType" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="dataBlob" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="timeStamp" Type="DateTime" Nullable="false" />
+          <Property Name="processedData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="instance" Relationship="Self.instance_sessiondata_fk" FromRole="sessiondata" ToRole="instance" />
+          <NavigationProperty Name="session" Relationship="Self.session_sessiondata_fk" FromRole="sessiondata" ToRole="session" />
+        </EntityType>
+        <EntityType Name="setup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="creationTimestamp" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="locations" Relationship="Self.setup_location_fk" FromRole="setup" ToRole="location" />
+          <NavigationProperty Name="sessions" Relationship="Self.setupID_fk" FromRole="setup" ToRole="session" />
+        </EntityType>
+        <Association Name="instance_location_fk">
+          <End Role="instance" Type="Self.instance" Multiplicity="1" />
+          <End Role="location" Type="Self.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="instanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="instance_sessiondata_fk">
+          <End Role="instance" Type="Self.instance" Multiplicity="1" />
+          <End Role="sessiondata" Type="Self.sessiondata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sessiondata">
+              <PropertyRef Name="instanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="setup_location_fk">
+          <End Role="setup" Type="Self.setup" Multiplicity="1" />
+          <End Role="location" Type="Self.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="setupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="session_sessiondata_fk">
+          <End Role="session" Type="Self.session" Multiplicity="1" />
+          <End Role="sessiondata" Type="Self.sessiondata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sessiondata">
+              <PropertyRef Name="sessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="setupID_fk">
+          <End Role="setup" Type="Self.setup" Multiplicity="1" />
+          <End Role="session" Type="Self.session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="session">
+              <PropertyRef Name="setupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="instances" EntityType="Self.instance" />
+          <EntitySet Name="locations" EntityType="Self.location" />
+          <EntitySet Name="messagelogs" EntityType="Self.messagelog" />
+          <EntitySet Name="sessions" EntityType="Self.session" />
+          <EntitySet Name="sessiondatas" EntityType="Self.sessiondata" />
+          <EntitySet Name="setups" EntityType="Self.setup" />
+          <AssociationSet Name="instance_location_fk" Association="Self.instance_location_fk">
+            <End Role="instance" EntitySet="instances" />
+            <End Role="location" EntitySet="locations" />
+          </AssociationSet>
+          <AssociationSet Name="instance_sessiondata_fk" Association="Self.instance_sessiondata_fk">
+            <End Role="instance" EntitySet="instances" />
+            <End Role="sessiondata" EntitySet="sessiondatas" />
+          </AssociationSet>
+          <AssociationSet Name="setup_location_fk" Association="Self.setup_location_fk">
+            <End Role="setup" EntitySet="setups" />
+            <End Role="location" EntitySet="locations" />
+          </AssociationSet>
+          <AssociationSet Name="session_sessiondata_fk" Association="Self.session_sessiondata_fk">
+            <End Role="session" EntitySet="sessions" />
+            <End Role="sessiondata" EntitySet="sessiondatas" />
+          </AssociationSet>
+          <AssociationSet Name="setupID_fk" Association="Self.setupID_fk">
+            <End Role="setup" EntitySet="setups" />
+            <End Role="session" EntitySet="sessions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dsessiondbModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="instances">
+            <EntityTypeMapping TypeName="dsessiondbModel.instance">
+              <MappingFragment StoreEntitySet="instance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="externalId" ColumnName="externalId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="creationTimeStamp" ColumnName="creationTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="locations">
+            <EntityTypeMapping TypeName="dsessiondbModel.location">
+              <MappingFragment StoreEntitySet="location">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="setupId" ColumnName="setupId" />
+                <ScalarProperty Name="instanceId" ColumnName="instanceId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="creationTimestamp" ColumnName="creationTimestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="messagelogs">
+            <EntityTypeMapping TypeName="dsessiondbModel.messagelog">
+              <MappingFragment StoreEntitySet="messagelog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="externalID" ColumnName="externalID" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="dataType" ColumnName="dataType" />
+                <ScalarProperty Name="data" ColumnName="data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sessions">
+            <EntityTypeMapping TypeName="dsessiondbModel.session">
+              <MappingFragment StoreEntitySet="session">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="setupId" ColumnName="setupId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sessiondatas">
+            <EntityTypeMapping TypeName="dsessiondbModel.sessiondata">
+              <MappingFragment StoreEntitySet="sessiondata">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+                <ScalarProperty Name="instanceId" ColumnName="instanceId" />
+                <ScalarProperty Name="dataType" ColumnName="dataType" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="dataBlob" ColumnName="dataBlob" />
+                <ScalarProperty Name="timeStamp" ColumnName="timeStamp" />
+                <ScalarProperty Name="processedData" ColumnName="processedData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="setups">
+            <EntityTypeMapping TypeName="dsessiondbModel.setup">
+              <MappingFragment StoreEntitySet="setup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="creationTimestamp" ColumnName="creationTimestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
