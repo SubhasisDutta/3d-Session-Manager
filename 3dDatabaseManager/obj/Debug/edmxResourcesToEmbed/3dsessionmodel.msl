@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-  <Alias Key="Model" Value="x0033_dsessionmodel" />
-  <Alias Key="Target" Value="x0033_dsessionmodel.Store" />
-  <EntityContainerMapping CdmEntityContainer="x0033_dsessionmodelContainer" StorageEntityContainer="x0033_dsessionmodelTargetContainer" />
-</Mapping>

@@ -1,0 +1,74 @@
+﻿@model _3dSessionMonitorWebApp.sessiondata
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>sessiondata</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dataType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataBlob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataBlob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timeStamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timeStamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.processedData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.processedData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.instance.externalId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.instance.externalId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.session.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.session.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
