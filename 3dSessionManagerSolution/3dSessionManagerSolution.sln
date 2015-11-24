@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3dSessionMonitorWebApp", "3dSessionMonitorWebApp\3dSessionMonitorWebApp.csproj", "{B50F8D65-FBD5-4FFB-95ED-80675CDCB4F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DSessionListiningServer", "3DSessionListiningServer\3DSessionListiningServer.csproj", "{10FF72E9-FB07-4CAA-829F-5E609056CA08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DSessionIndependentAsyncClient", "3DSessionIndependentAsyncClient\3DSessionIndependentAsyncClient.csproj", "{BAAA7142-901D-43E4-A9E1-0F2477CB0C54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{B50F8D65-FBD5-4FFB-95ED-80675CDCB4F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B50F8D65-FBD5-4FFB-95ED-80675CDCB4F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B50F8D65-FBD5-4FFB-95ED-80675CDCB4F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10FF72E9-FB07-4CAA-829F-5E609056CA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10FF72E9-FB07-4CAA-829F-5E609056CA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10FF72E9-FB07-4CAA-829F-5E609056CA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10FF72E9-FB07-4CAA-829F-5E609056CA08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAAA7142-901D-43E4-A9E1-0F2477CB0C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAAA7142-901D-43E4-A9E1-0F2477CB0C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAAA7142-901D-43E4-A9E1-0F2477CB0C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAAA7142-901D-43E4-A9E1-0F2477CB0C54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
