@@ -1,17 +1,21 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    ViewBag.Title = "Error";
+}
+<h2>@ViewBag.Title.</h2>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
-<body>
-    <hgroup>
-        <h1>Error.</h1>
+
+
+    
+        
+
         <h2>An error occurred while processing your request.</h2>
-    </hgroup>
-</body>
-</html>
+        <P>You probably tried to do an operation that would make the database in consistnt. 
+            <br/>
+            TODO : Details of Error.
+        </P>
+    
+
+

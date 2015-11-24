@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<_3dSessionMonitorWebApp.instance>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Registered Instance List";
 }
 
-<h2>Index</h2>
+<h2>Registered Instance List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Register New Instance", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.externalId)
+        <th>            
+            HUNA IP/Unique ID
         </th>
         <th>
             @Html.DisplayNameFor(model => model.name)

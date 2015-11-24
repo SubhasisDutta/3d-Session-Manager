@@ -10,7 +10,7 @@ using _3dSessionMonitorWebApp;
 
 namespace _3dSessionMonitorWebApp.Controllers
 {
-    public class SessionController : Controller
+    public class SessionController : BaseController
     {
         private MYSQL3DSessionEntities db = new MYSQL3DSessionEntities();
 

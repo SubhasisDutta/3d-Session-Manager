@@ -4,24 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>HUNA Message Log</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+   This list contains all the messages that have been received from all HUNA INSTANCE.
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.externalID)
+            HUNA IP/Unique ID
+            <!--Html.DisplayNameFor(model => model.externalID)-->
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.timestamp)
+            Log Time
+            <!--Html.DisplayNameFor(model => model.timestamp)-->
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dataType)
+            Message Type
+            <!--Html.DisplayNameFor(model => model.dataType)-->
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.data)
+            Message
+            <!--Html.DisplayNameFor(model => model.data)-->
         </th>
         <th></th>
     </tr>

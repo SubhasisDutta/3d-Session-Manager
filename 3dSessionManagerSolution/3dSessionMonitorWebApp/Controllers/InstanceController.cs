@@ -10,7 +10,7 @@ using _3dSessionMonitorWebApp;
 
 namespace _3dSessionMonitorWebApp.Controllers
 {
-    public class InstanceController : Controller
+    public class InstanceController : BaseController
     {
         private MYSQL3DSessionEntities db = new MYSQL3DSessionEntities();
 
@@ -49,9 +49,18 @@ namespace _3dSessionMonitorWebApp.Controllers
         public ActionResult Create([Bind(Include="id,externalId,name,description,creationTimeStamp")] instance instance)
         {
             if (ModelState.IsValid)
-            {
-                db.instances.Add(instance);
-                db.SaveChanges();
+            {                
+                try
+                {
+                    instance.creationTimeStamp = DateTime.Now;
+                    db.instances.Add(instance);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return View("Error",ex); 
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -110,8 +119,16 @@ namespace _3dSessionMonitorWebApp.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             instance instance = db.instances.Find(id);
-            db.instances.Remove(instance);
-            db.SaveChanges();
+            try
+            {
+                db.instances.Remove(instance);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }          
+
             return RedirectToAction("Index");
         }
 

@@ -10,14 +10,14 @@ using _3dSessionMonitorWebApp;
 
 namespace _3dSessionMonitorWebApp.Controllers
 {
-    public class MessageLogController : Controller
+    public class MessageLogController : BaseController
     {
         private MYSQL3DSessionEntities db = new MYSQL3DSessionEntities();
 
         // GET: /MessageLog/
         public ActionResult Index()
         {
-            return View(db.messagelogs.ToList());
+            return View(db.messagelogs.OrderByDescending(r=>r.timestamp).ToList());
         }
 
         // GET: /MessageLog/Details/5
@@ -50,8 +50,16 @@ namespace _3dSessionMonitorWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.messagelogs.Add(messagelog);
-                db.SaveChanges();
+                try
+                {
+                    messagelog.timestamp = DateTime.Now;
+                    db.messagelogs.Add(messagelog);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return View("Error", ex);
+                }  
                 return RedirectToAction("Index");
             }
 
@@ -109,9 +117,16 @@ namespace _3dSessionMonitorWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            messagelog messagelog = db.messagelogs.Find(id);
-            db.messagelogs.Remove(messagelog);
-            db.SaveChanges();
+            messagelog messagelog = db.messagelogs.Find(id);            
+            try
+            {
+                db.messagelogs.Remove(messagelog);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
             return RedirectToAction("Index");
         }
 
