@@ -260,6 +260,7 @@
     <Content Include="Views\Session\Index.cshtml" />
     <Content Include="Views\Location\AvailableInstance.cshtml" />
     <Content Include="Views\Location\AddInstance.cshtml" />
+    <Content Include="Views\SessionData\AvailableSessionData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

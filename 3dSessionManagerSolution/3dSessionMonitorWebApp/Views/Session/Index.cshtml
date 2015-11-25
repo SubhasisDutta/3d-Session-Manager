@@ -4,30 +4,30 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Session Manager</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Start New Session", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+           Session Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+           Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.startTime)
+            Start Time
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.endTime)
+           End Time
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.isActive)
+            Is Active
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.setup.name)
+            Using setup
         </th>
         <th></th>
     </tr>

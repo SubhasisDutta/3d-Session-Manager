@@ -59,6 +59,11 @@
         </dd>
 
     </dl>
+    <hr />
+    <dl class="dl-horizontal">        
+        <a class="btn btn-default" href="@Url.Action("AvailableSessionData", "SessionData", new { id = Model.id })">See Available Session Data &raquo;</a>
+    </dl>
+    <hr />
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |

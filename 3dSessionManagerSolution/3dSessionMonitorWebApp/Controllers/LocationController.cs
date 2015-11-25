@@ -157,7 +157,7 @@ namespace _3dSessionMonitorWebApp.Controllers
             location location = db.locations.Find(id);
             db.locations.Remove(location);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Setup");
         }
 
         protected override void Dispose(bool disposing)

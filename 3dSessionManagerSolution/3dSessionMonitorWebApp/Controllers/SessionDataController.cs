@@ -21,6 +21,13 @@ namespace _3dSessionMonitorWebApp.Controllers
             return View(sessiondatas.ToList());
         }
 
+        // GET: /SessionData/AvailableSessionData/5
+        public ActionResult AvailableSessionData(int? id)
+        {
+            var sessiondatas = db.sessiondatas.Where(a=>a.sessionId == id).ToList();
+            return View(sessiondatas);
+        }
+
         // GET: /SessionData/Details/5
         public ActionResult Details(int? id)
         {
@@ -121,7 +128,7 @@ namespace _3dSessionMonitorWebApp.Controllers
             sessiondata sessiondata = db.sessiondatas.Find(id);
             db.sessiondatas.Remove(sessiondata);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Session");
         }
 
         protected override void Dispose(bool disposing)

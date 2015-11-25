@@ -1,0 +1,60 @@
+﻿@model IEnumerable<_3dSessionMonitorWebApp.sessiondata>
+
+@{
+    ViewBag.Title = "Session Data";
+}
+
+<h2>Session Data</h2>
+
+<p>
+    List all Data received by the instances of the Session when Active.
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Message/Data Type
+        </th>
+        <th>
+            Message/Data
+        </th>       
+        <th>
+           Time Stamp
+        </th>        
+        <th>
+            HUNA Instance ID
+        </th>
+        <th>
+            Session Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.data)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.timeStamp)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.instance.externalId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.session.name)
+        </td>
+        <td>            
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
+<hr/>
+<div>
+    <a href="@Url.Action("Index", "Session")">Back to Session Management</a>
+</div>

@@ -40,23 +40,7 @@
                 @Html.ValidationMessageFor(model => model.description)
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.startTime, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.startTime)
-                @Html.ValidationMessageFor(model => model.startTime)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.endTime, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.endTime)
-                @Html.ValidationMessageFor(model => model.endTime)
-            </div>
-        </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.isActive, new { @class = "control-label col-md-2" })
             <div class="col-md-10">

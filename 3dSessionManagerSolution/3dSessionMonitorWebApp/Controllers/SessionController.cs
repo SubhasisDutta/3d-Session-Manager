@@ -51,9 +51,27 @@ namespace _3dSessionMonitorWebApp.Controllers
         public ActionResult Create([Bind(Include="id,setupId,name,description,startTime,endTime,isActive")] session session)
         {
             if (ModelState.IsValid)
-            {
-                db.sessions.Add(session);
-                db.SaveChanges();
+            {                
+                try
+                {
+                    if (session.isActive == true)
+                    {
+                        session.startTime = DateTime.Now;
+                        session.endTime = null;
+                    }                    
+                    else
+                    {
+                        session.startTime = null;
+                        session.endTime = null;
+                    }
+
+                    db.sessions.Add(session);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return View("Error", ex);
+                }
                 return RedirectToAction("Index");
             }
 
@@ -114,9 +132,16 @@ namespace _3dSessionMonitorWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            session session = db.sessions.Find(id);
-            db.sessions.Remove(session);
-            db.SaveChanges();
+            session session = db.sessions.Find(id);           
+            try
+            {
+                db.sessions.Remove(session);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
             return RedirectToAction("Index");
         }
 
