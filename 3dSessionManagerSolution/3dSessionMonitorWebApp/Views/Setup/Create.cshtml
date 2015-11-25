@@ -1,10 +1,10 @@
 ﻿@model _3dSessionMonitorWebApp.setup
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New Setup Configuration";
 }
 
-<h2>Create</h2>
+<h2>Create New Setup Configuration</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>setup</h4>
+        <h4>New Setup</h4>
+
         <hr />
         @Html.ValidationSummary(true)
 
@@ -31,14 +32,7 @@
                 @Html.ValidationMessageFor(model => model.description)
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.creationTimestamp, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.creationTimestamp)
-                @Html.ValidationMessageFor(model => model.creationTimestamp)
-            </div>
-        </div>
+                
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

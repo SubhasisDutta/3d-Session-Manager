@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Setup Configuration of @Html.DisplayFor(model => model.name)</h2>
 
 <div>
-    <h4>setup</h4>
+    <h4>Setup details</h4>
 	<hr />
     <dl class="dl-horizontal">
         <dt>
@@ -35,6 +35,12 @@
         </dd>
 
     </dl>
+    <hr />
+    <dl class="dl-horizontal"> 
+        <a class="btn btn-default" href="@Url.Action("AddInstance", "Location", new { id = Model.id })">Attach Instances To Setup &raquo;</a> |
+        <a class="btn btn-default" href="@Url.Action("AvailableInstance", "Location", new { id = Model.id })">See Available Instances In this Setup &raquo;</a>
+    </dl>
+    <hr />
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |

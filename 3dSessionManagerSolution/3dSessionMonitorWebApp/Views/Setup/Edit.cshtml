@@ -49,6 +49,13 @@
     </div>
 }
 
+<hr />
+<dl class="dl-horizontal">
+    <a class="btn btn-default" href="@Url.Action("AddInstance", "Location", new { id = Model.id })">Attach Instances To Setup &raquo;</a> |
+    <a class="btn btn-default" href="@Url.Action("AvailableInstance", "Location", new { id = Model.id })">See Available Instances In this Setup &raquo;</a>
+</dl>
+<hr />
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

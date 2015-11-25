@@ -50,8 +50,17 @@ namespace _3dSessionMonitorWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.setups.Add(setup);
-                db.SaveChanges();
+                try
+                {
+                    setup.creationTimestamp = DateTime.Now;
+                    db.setups.Add(setup);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return View("Error", ex);
+                }
+                
                 return RedirectToAction("Index");
             }
 
@@ -109,9 +118,16 @@ namespace _3dSessionMonitorWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            setup setup = db.setups.Find(id);
-            db.setups.Remove(setup);
-            db.SaveChanges();
+            setup setup = db.setups.Find(id);            
+            try
+            {
+                db.setups.Remove(setup);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
             return RedirectToAction("Index");
         }
 

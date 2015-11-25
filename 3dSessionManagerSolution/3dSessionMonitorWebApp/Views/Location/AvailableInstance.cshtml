@@ -1,24 +1,26 @@
-﻿@model IEnumerable<_3dSessionMonitorWebApp.setup>
+﻿@model IEnumerable<_3dSessionMonitorWebApp.location>
 
 @{
-    ViewBag.Title = "Setup Index";
+    ViewBag.Title = "Available Instance";
 }
 
-<h2>Available Setup Configurations</h2>
+<h2>Available Instance in Setup</h2>
 
-<p>
-    @Html.ActionLink("Create New Setup", "Create")
-</p>
+<p>Available Instances</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+            Location Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.creationTimestamp)
+            Creation Time Stamp
+        </th>        
+        <th>
+            Device/HUNA Instance Name
         </th>
         <th></th>
     </tr>
@@ -33,6 +35,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.creationTimestamp)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.setup.name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
@@ -43,3 +48,9 @@
 }
 
 </table>
+<hr />
+
+<div>
+    <a href="@Url.Action("Index", "Setup")">Back to Setup</a>
+    
+</div>

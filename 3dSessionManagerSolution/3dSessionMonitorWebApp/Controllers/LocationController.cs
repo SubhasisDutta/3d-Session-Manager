@@ -21,6 +21,13 @@ namespace _3dSessionMonitorWebApp.Controllers
             return View(locations.ToList());
         }
 
+        // GET: /Location/AvailableInstance/5
+        public ActionResult AvailableInstance(int? id)
+        {
+            var locations = db.locations.Where(a=>a.setupId == id).ToList();
+            return View(locations);
+        }
+
         // GET: /Location/Details/5
         public ActionResult Details(int? id)
         {
@@ -62,6 +69,35 @@ namespace _3dSessionMonitorWebApp.Controllers
             ViewBag.setupId = new SelectList(db.setups, "id", "name", location.setupId);
             return View(location);
         }
+
+        // GET: /Location/AddInstance/5
+        public ActionResult AddInstance(int? id)
+        {
+            ViewBag.instanceId = new SelectList(db.instances, "id", "externalId");
+            //ViewBag.setupId = new SelectList(db.setups, "id", "name");
+            ViewBag.setup = db.setups.Find(id);
+            return View();
+        }
+
+        // POST: /Location/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddInstance([Bind(Include = "id,setupId,instanceId,name,description,creationTimestamp")] location location,int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                location.setupId = (int)id;
+                location.creationTimestamp = DateTime.Now;
+                db.locations.Add(location);
+                db.SaveChanges();
+                return RedirectToAction("AvailableInstance", new { id=id});
+            }
+                        
+            return RedirectToAction("Index","Setup");
+        }
+
 
         // GET: /Location/Edit/5
         public ActionResult Edit(int? id)
