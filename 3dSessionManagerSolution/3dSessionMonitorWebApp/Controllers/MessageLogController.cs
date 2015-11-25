@@ -17,7 +17,7 @@ namespace _3dSessionMonitorWebApp.Controllers
         // GET: /MessageLog/
         public ActionResult Index()
         {
-            return View(db.messagelogs.OrderByDescending(r=>r.timestamp).ToList());
+            return View(db.messagelogs.OrderByDescending(r=>r.timestamp).Take(50).ToList());
         }
 
         // GET: /MessageLog/Details/5

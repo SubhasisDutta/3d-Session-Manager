@@ -37,7 +37,25 @@ namespace _3DSessionListiningServer
                 db.messagelogs.Add(messageLogObj);
                 db.SaveChanges();
 
-
+                instance instanceObj = db.instances.Where(a => a.externalId == msg.id).SingleOrDefault();
+                List<location> allLocation = db.locations.Where(a => a.instanceId == instanceObj.id).ToList();
+                List<session> activeSessions = new List<session>();
+                foreach (var location in allLocation)
+                {
+                    var sessionsObj = db.sessions.Where(a => a.setupId == location.setupId && a.isActive == true).ToList();
+                    activeSessions.AddRange(sessionsObj);
+                }
+                foreach (var activesession in activeSessions)
+                {
+                    sessiondata obj = new sessiondata();
+                    obj.sessionId = activesession.id;
+                    obj.instanceId = instanceObj.id;
+                    obj.dataType = msg.dataType;
+                    obj.data = msg.data;
+                    obj.timeStamp = DateTime.Now;
+                    db.sessiondatas.Add(obj);
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
