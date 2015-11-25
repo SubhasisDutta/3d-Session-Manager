@@ -104,8 +104,31 @@ namespace _3dSessionMonitorWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(session).State = EntityState.Modified;
-                db.SaveChanges();
+
+                
+                try
+                {
+                    if (session.isActive == true)
+                    {
+                        session.startTime = DateTime.Now;
+                    }
+                    else if (session.isActive == false)
+                    {
+                        session.endTime = DateTime.Now;
+                    }
+                    else
+                    {
+                        session.startTime = null;
+                        session.endTime = null;
+                    }
+
+                    db.Entry(session).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return View("Error", ex);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.setupId = new SelectList(db.setups, "id", "name", session.setupId);
