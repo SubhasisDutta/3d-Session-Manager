@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.dataType)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.data)
+            @Html.Raw(item.data)
         </td>        
         <td>
             @Html.DisplayFor(modelItem => item.timeStamp)

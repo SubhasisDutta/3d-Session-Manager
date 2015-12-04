@@ -27,7 +27,8 @@ namespace _3DSessionListiningServer
             try
             {
                 //Receive Client message and parse it to a JSON Object
-                InstanceMessage msg = JsonConvert.DeserializeObject<InstanceMessage>(message.Replace("<EOF>", ""));
+                String safeMessage = message.Replace("<EOF>", "");               
+                InstanceMessage msg = JsonConvert.DeserializeObject<InstanceMessage>(safeMessage);
                 //Save the message to a message log
                 messagelog messageLogObj = new messagelog();
                 messageLogObj.timestamp = DateTime.Now;

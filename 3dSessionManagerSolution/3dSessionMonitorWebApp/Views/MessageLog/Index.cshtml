@@ -41,8 +41,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.dataType)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.data)
+        <td>            
+            @Html.Raw(item.data)           
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

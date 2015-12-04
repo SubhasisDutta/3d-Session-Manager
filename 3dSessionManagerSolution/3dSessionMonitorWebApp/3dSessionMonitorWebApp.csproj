@@ -206,6 +206,7 @@
       <LastGenOutput>3DSessionEntityModel.cs</LastGenOutput>
     </Content>
     <Content Include="Schema\Test Data\Instance.csv" />
+    <Content Include="Content\Temp\Instance\SkeletonData1.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
