@@ -185,7 +185,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Schema\3dsessiondb.sql" />
-    <Content Include="Schema\dbsds.png" />
+    <Content Include="Schema\DataBase Design.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="3DSessionEntityModel.edmx">
